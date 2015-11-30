@@ -1,0 +1,18 @@
+[user]
+    name = Frederik Martin
+    email = frederik.martin@gmail.com
+
+[github]
+    user = frederikmartin
+
+[core]
+    excludesfile = ~/.gitignore_global
+    editor = vim
+    filemode = false
+    trustctime = false
+
+[alias]
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
