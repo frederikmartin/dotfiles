@@ -5,6 +5,11 @@
 export DOTFILES_DIR EXTRA_DIR
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Symlinks
+
+ln -sfv "$DOTFILES_DIR/bash/.bash_profile" ~
+ln -sfv "$DOTFILES_DIR/git/.gitignore_global" ~
+
 # Package managers & packages
 
 . "$DOTFILES_DIR/install/brew.sh"
