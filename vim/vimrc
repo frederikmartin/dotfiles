@@ -1,0 +1,2 @@
+set number	" Add line numbers
+set tabstop=2	" Softtabs, 2 spaces
