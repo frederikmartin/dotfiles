@@ -16,8 +16,19 @@ set wildignore+=**/.git/*
 " Plugins
 call plug#begin()
 
-Plug 'vijaymarupudi/nvim-fzf'
-Plug 'vijaymarupudi/nvim-fzf-commands'
+Plug 'mhartington/oceanic-next'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
+
+" Color scheme
+set termguicolors
+colorscheme OceanicNext
+
+" Fzf
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-g> :GFiles<CR>
+nnoremap <silent> <C-o> :Buffers<CR>
+nnoremap <C-f> :Rg! 
 
