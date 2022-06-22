@@ -47,6 +47,14 @@ let mapleader = " "
 
 nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
 
+" Project file tree
+nnoremap <leader>pv :Lex<CR>
+let g:netrw_winsize = 25
+
+" Search result highlighting
+nnoremap <silent> <Esc><Esc> :let @/ = ""<CR>
+nnoremap <silent> <Space> :set hlsearch!<CR>
+
 " Fzf
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-g> :GFiles<CR>
@@ -61,8 +69,4 @@ nnoremap <leader>fq :FlutterQuit<CR>
 nnoremap <leader>fr :FlutterHotReload<CR>
 nnoremap <leader>fR :FlutterHotRestart<CR>
 nnoremap <leader>fD :FlutterVisualDebug<CR>
-
-" Project file tree
-nnoremap <leader>pv :Lex<CR>
-let g:netrw_winsize = 25
 
