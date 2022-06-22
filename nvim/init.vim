@@ -50,7 +50,7 @@ nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
 " Fzf
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-g> :GFiles<CR>
-nnoremap <silent> <C-o> :Buffers<CR>
+nnoremap <silent> <C-b> :Buffers<CR>
 nnoremap <silent> <C-l> :Lines<CR>
 nnoremap <C-f> :Rg! 
 let g:fzf_layout = { 'down': '40%' }
