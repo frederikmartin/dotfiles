@@ -133,4 +133,7 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 # Ruby version manager Frum setup
 eval "$(frum init)"
 
+# Nvim
+alias vim="nvim"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
