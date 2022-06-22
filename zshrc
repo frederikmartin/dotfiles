@@ -133,7 +133,10 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 # Ruby version manager Frum setup
 eval "$(frum init)"
 
-# Nvim
+# nvim
 alias vim="nvim"
 
+# fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'
+
