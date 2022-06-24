@@ -22,7 +22,8 @@ set wildignore+=**/.git/*
 " Plugins
 call plug#begin()
 
-Plug 'mhartington/oceanic-next'
+Plug 'tjdevries/colorbuddy.vim'
+Plug 'tjdevries/gruvbuddy.nvim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'dart-lang/dart-vim-plugin'
@@ -39,8 +40,7 @@ let g:dart_format_on_save = 1
 let g:flutter_autoscroll = 1
 
 " Color scheme
-set termguicolors
-colorscheme OceanicNext
+lua require('colorbuddy').colorscheme('gruvbuddy')
 
 " Remaps
 let mapleader = " "
