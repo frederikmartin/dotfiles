@@ -60,7 +60,7 @@ nnoremap <C-k> :cprev<CR>
 
 " Fzf
 nnoremap <silent> <C-p> :GFiles<CR>
-nnoremap <silent> <C-a> :Files<CR>
+nnoremap <leader>pf :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 nnoremap <silent> <C-l> :Lines<CR>
 nnoremap <C-f> :Rg! 
