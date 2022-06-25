@@ -55,6 +55,9 @@ let g:netrw_winsize = 25
 nnoremap <silent> <Esc><Esc> :let @/ = ""<CR>
 nnoremap <silent> <Space> :set hlsearch!<CR>
 
+nnoremap <C-j> :cnext<CR>
+nnoremap <C-k> :cprev<CR>
+
 " Fzf
 nnoremap <silent> <C-p> :GFiles<CR>
 nnoremap <silent> <C-a> :Files<CR>
