@@ -139,4 +139,5 @@ alias vim="nvim"
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'
+export FZF_DEFAULT_COMMAND='rg --files'
 
