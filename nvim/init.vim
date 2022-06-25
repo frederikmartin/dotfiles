@@ -56,8 +56,8 @@ nnoremap <silent> <Esc><Esc> :let @/ = ""<CR>
 nnoremap <silent> <Space> :set hlsearch!<CR>
 
 " Fzf
-nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <C-g> :GFiles<CR>
+nnoremap <silent> <C-p> :GFiles<CR>
+nnoremap <silent> <C-a> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 nnoremap <silent> <C-l> :Lines<CR>
 nnoremap <C-f> :Rg! 
