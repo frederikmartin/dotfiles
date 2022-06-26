@@ -111,9 +111,9 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Create gitlab merge request for current branch
 gmr() {
-  branch=$(git branch --show-current)
-  host=$(git remote get-url origin | sed 's/[^@]*@//; s/.[^.]*$//; s/:/\//')
-  open "https://$host/-/merge_requests/new?merge_request[source_branch]=$branch"
+    branch=$(git branch --show-current)
+    host=$(git remote get-url origin | sed 's/[^@]*@//; s/.[^.]*$//; s/:/\//')
+    open "https://$host/-/merge_requests/new?merge_request[source_branch]=$branch"
 }
 # Shrug shortcut
 alias _shrug="echo -n '¯\_(ツ)_/¯' | pbcopy"
@@ -139,6 +139,11 @@ alias vim="nvim"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'
 export FZF_DEFAULT_COMMAND='rg --files'
+
+# tmux
+ide() {
+    tmux split-window -v -p 30
+    tmux split-window -h -p 50
+}
 
