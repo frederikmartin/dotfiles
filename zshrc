@@ -109,6 +109,8 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Custom functions
 
+alias dev="cd ~/Documents/development"
+
 # Create gitlab merge request for current branch
 gmr() {
     branch=$(git branch --show-current)
@@ -141,7 +143,7 @@ alias vim="nvim"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files'
 
-# tmux
+# tmux ide pane setup
 ide() {
     tmux split-window -v -p 30
     tmux split-window -h -p 50
