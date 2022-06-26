@@ -68,7 +68,7 @@ nnoremap <C-k> :cprev<CR>
 " Fzf
 nnoremap <silent> <C-p> :GFiles<CR>
 nnoremap <leader>pf :Files<CR>
-nnoremap <silent> <C-b> :Buffers<CR>
+nnoremap <leader>bf :Buffers<CR>
 nnoremap <silent> <C-l> :Lines<CR>
 nnoremap <C-f> :Rg! 
 let g:fzf_layout = { 'down': '40%' }
