@@ -22,16 +22,22 @@ set wildignore+=**/.git/*
 " Plugins
 call plug#begin()
 
-Plug 'tjdevries/colorbuddy.vim'
-Plug 'tjdevries/gruvbuddy.nvim'
+Plug 'mhartington/oceanic-next'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'natebosch/vim-lsc'
 Plug 'natebosch/vim-lsc-dart'
 Plug 'thosakwe/vim-flutter'
+Plug 'ray-x/go.nvim'
+Plug 'ray-x/guihua.lua'
 
 call plug#end()
+
+" Go options
+autocmd BufWritePre *.go :silent! lua require('go.format').gofmt()
+lua require('go').setup()
 
 " Dart options
 let dart_html_in_string = v:true
@@ -40,7 +46,8 @@ let g:dart_format_on_save = 1
 let g:flutter_autoscroll = 1
 
 " Color scheme
-lua require('colorbuddy').colorscheme('gruvbuddy')
+set termguicolors
+colorscheme OceanicNext
 
 " Remaps
 let mapleader = " "
