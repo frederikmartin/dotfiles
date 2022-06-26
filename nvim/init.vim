@@ -30,14 +30,9 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'natebosch/vim-lsc'
 Plug 'natebosch/vim-lsc-dart'
 Plug 'thosakwe/vim-flutter'
-Plug 'ray-x/go.nvim'
-Plug 'ray-x/guihua.lua'
+Plug 'fatih/vim-go'
 
 call plug#end()
-
-" Go options
-autocmd BufWritePre *.go :silent! lua require('go.format').gofmt()
-lua require('go').setup()
 
 " Dart options
 let dart_html_in_string = v:true
