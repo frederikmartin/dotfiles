@@ -146,6 +146,10 @@ export FZF_DEFAULT_COMMAND='rg --files'
 # tmux ide pane setup
 ide() {
     tmux split-window -v -p 30
-    tmux split-window -h -p 50
+    if [[ "$#" -eq 1 && "$1" == "l" ]]; then
+        tmux split-window -h -p 50
+    fi
+    tmux select-pane -U
+    vim .
 }
 
