@@ -6,6 +6,7 @@ set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
+set mouse=a
 
 " Nice when typing `:find *.py`
 set wildmode=longest,list,full
