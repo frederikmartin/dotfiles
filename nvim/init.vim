@@ -64,3 +64,7 @@ nnoremap <silent> <C-l> :Lines<CR>
 nnoremap <C-f> :Rg! 
 let g:fzf_layout = { 'down': '40%' }
 
+" Move visual group
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '>-2<CR>gv=gv
+
