@@ -142,9 +142,6 @@ if [ -f '/Applications/google-cloud-sdk/completion.zsh.inc' ]; then . '/Applicat
 export PATH="$PATH:/Applications/flutter/bin"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
-# Ruby version manager Frum setup
-eval "$(frum init)"
-
 # nvim
 alias vim="nvim"
 
