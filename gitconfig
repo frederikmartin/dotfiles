@@ -2,3 +2,5 @@
     defaultBranch = main
 [user]
 	useConfigOnly = true
+[core]
+	autocrlf = input
