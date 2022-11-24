@@ -4,3 +4,7 @@
 	useConfigOnly = true
 [core]
 	autocrlf = input
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
