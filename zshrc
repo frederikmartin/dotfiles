@@ -151,12 +151,19 @@ export FZF_DEFAULT_COMMAND='rg --files'
 
 # tmux ide pane setup
 ide() {
-    tmux split-window -v -p 30
-    if [[ "$#" -eq 1 && "$1" == "l" ]]; then
-        tmux split-window -h -p 50
+    if [[ "$#" -eq 1 && "$1" == "v" ]]; then
+        tmux split-window -h -p 75 "nvim ."
+        tmux select-pane -t 0
+        clear
+        tmux select-pane -t 1
+    else
+        tmux split-window -v -p 20
+        if [[ "$#" -eq 1 && "$1" == "l" ]]; then
+            tmux split-window -h -p 50
+        fi
+        tmux select-pane -t 0
+        vim .
     fi
-    tmux select-pane -U
-    vim .
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
