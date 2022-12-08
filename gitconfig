@@ -2,9 +2,10 @@
     defaultBranch = main
 [user]
 	useConfigOnly = true
+	signingKey = 23508AA96C85020BEB03B007123545A600D0E612
 [core]
 	autocrlf = input
 [commit]
 	gpgsign = true
 [gpg]
-	program = gpg
+	program = /usr/local/MacGPG2/bin/gpg
