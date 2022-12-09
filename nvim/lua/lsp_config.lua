@@ -1,68 +1,142 @@
-require("nvim-lsp-installer").setup {}
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+-- LSP
+require('mason').setup()
+require('mason-lspconfig').setup({
+    ensure_installed = {
+        'bashls',
+        'cmake',
+        'cssls',
+        'dockerls',
+        'gopls',
+        'html',
+        'jsonls',
+        'tsserver',
+        'sumneko_lua',
+        'marksman',
+        'pyright',
+        'ruby_ls',
+        'rust_analyzer',
+        'sqlls',
+        'terraformls',
+        'lemminx',
+        'yamlls'
+    }
+})
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+local on_attach = function()
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer=0 })
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer=0 })
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer=0 })
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer=0 })
+    vim.keymap.set('n', 'gT', vim.lsp.buf.type_definition, { buffer=0 })
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer=0 })
+    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer=0 })
+    vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, { buffer=0 })
+    vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { buffer=0 })
+    vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { buffer=0 })
+    -- TODO: vim.keymap.set('n', '<leader>dl', '<cmd>Telescope diagnostics<cr>', { buffer=0 })
 end
+-- Servers
+require('lspconfig').bashls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').cmake.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').cssls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').dockerls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').gopls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').html.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').jsonls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').tsserver.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').sumneko_lua.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').marksman.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').pyright.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').ruby_ls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').rust_analyzer.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').sqlls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').terraformls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').lemminx.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+require('lspconfig').yamlls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
 
-require('lspconfig')['pyright'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-require('lspconfig')['tsserver'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-require('lspconfig')['gopls'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-require('lspconfig')['dartls'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-require('lspconfig')['sumneko_lua'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-require('lspconfig')['html'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-require('lspconfig')['cssls'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-require('lspconfig')['terraformls'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
+-- Auto-completion
+vim.opt.completeopt={'menu', 'menuone', 'noselect'}
+local cmp = require'cmp'
+
+cmp.setup({
+snippet = {
+  expand = function(args)
+    require('luasnip').lsp_expand(args.body)
+  end,
+},
+mapping = cmp.mapping.preset.insert({
+  ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+  ['<C-f>'] = cmp.mapping.scroll_docs(4),
+  ['<C-Space>'] = cmp.mapping.complete(),
+  ['<C-e>'] = cmp.mapping.abort(),
+  ['<CR>'] = cmp.mapping.confirm({ select = true }),
+}),
+sources = cmp.config.sources({
+  { name = 'nvim_lsp' },
+  { name = 'luasnip' },
+}, {
+  { name = 'buffer' },
+})
+})
+
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'cmp_git' },
+  }, {
+    { name = 'buffer' },
+  })
+})
+

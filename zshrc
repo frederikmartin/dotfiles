@@ -171,3 +171,8 @@ ide() {
 
 # GPG signing
 export GPG_TTY=$(tty)
+
+# Golang
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH="$GOPATH/bin:$PATH"

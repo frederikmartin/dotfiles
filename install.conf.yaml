@@ -13,6 +13,7 @@
     ~/.zshrc: zshrc
     ~/.config/nvim/init.vim: nvim/init.vim
     ~/.config/nvim/lua/lsp_config.lua: nvim/lua/lsp_config.lua
+    ~/.config/nvim/lua/treesitter.lua: nvim/lua/treesitter.lua
     ~/.tmux.conf: tmux.conf
 
 - shell:
