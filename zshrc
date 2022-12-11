@@ -123,9 +123,17 @@ alias dev="cd ~/Documents/development"
 # Create gitlab merge request for current branch
 gmr() {
     branch=$(git branch --show-current)
-    host=$(git remote get-url origin | sed 's/[^@]*@//; s/.[^.]*$//; s/:/\//')
+    host=$(git remote get-url origin | sed "s/[^@]*@//; s/.[^.]*$//; s/:/\//")
     open "https://$host/-/merge_requests/new?merge_request[source_branch]=$branch"
 }
+gbc() {
+    feature_branch=$(git branch --show-current)
+    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed "s@^refs/remotes/origin/@@")
+    git checkout $default_branch
+    git pull
+    git branch -D $feature_branch
+}
+
 # Shrug shortcut
 alias _shrug="echo -n '¯\_(ツ)_/¯' | pbcopy"
 
