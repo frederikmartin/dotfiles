@@ -128,7 +128,7 @@ gmr() {
 }
 gbc() {
     feature_branch=$(git branch --show-current)
-    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed "s@^refs/remotes/origin/@@")
+    default_branch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
     git checkout $default_branch
     git pull
     git branch -D $feature_branch
