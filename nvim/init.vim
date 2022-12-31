@@ -7,6 +7,7 @@ set shiftwidth=4
 set expandtab
 set smartindent
 set mouse=a
+set clipboard=unnamed
 
 " Nice when typing `:find *.py`
 set wildmode=longest,list,full
