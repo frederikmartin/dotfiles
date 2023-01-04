@@ -164,6 +164,12 @@ ide() {
         tmux select-pane -t 0
         clear
         tmux select-pane -t 1
+    elif [[ "$#" -eq 1 && "$1" == "rn" ]]; then
+        tmux split-window -h -p 75 "nvim ."
+        tmux select-pane -t 0
+        clear
+        tmux split-window -v -p 25 "npm start"
+        tmux select-pane -t 2
     else
         tmux split-window -v -p 20
         if [[ "$#" -eq 1 && "$1" == "l" ]]; then
