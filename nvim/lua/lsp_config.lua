@@ -16,7 +16,6 @@ require('mason-lspconfig').setup({
         'marksman',
         'pyright',
         'ruby_ls',
-        'rust_analyzer',
         'sqlls',
         'terraformls',
         'lemminx',
@@ -38,71 +37,75 @@ local on_attach = function()
     -- TODO: vim.keymap.set('n', '<leader>dl', '<cmd>Telescope diagnostics<cr>', { buffer=0 })
 end
 -- Servers
-require('lspconfig').bashls.setup {
+local lspconfig = require('lspconfig')
+lspconfig.bashls.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').cmake.setup {
+lspconfig.cmake.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').cssls.setup {
+lspconfig.cssls.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').dockerls.setup {
+lspconfig.dockerls.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').gopls.setup {
+lspconfig.gopls.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').html.setup {
+lspconfig.html.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').jsonls.setup {
+lspconfig.jsonls.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').tsserver.setup {
+lspconfig.tsserver.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').sumneko_lua.setup {
+lspconfig.sumneko_lua.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').marksman.setup {
+lspconfig.marksman.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').pyright.setup {
+lspconfig.pyright.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').ruby_ls.setup {
+lspconfig.ruby_ls.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').rust_analyzer.setup {
+lspconfig.rust_analyzer.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    cmd = {
+        'rustup', 'run', 'stable', 'rust-analyzer'
+    }
+}
+lspconfig.sqlls.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').sqlls.setup {
+lspconfig.terraformls.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').terraformls.setup {
+lspconfig.lemminx.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require('lspconfig').lemminx.setup {
-    capabilities = capabilities,
-    on_attach = on_attach
-}
-require('lspconfig').yamlls.setup {
+lspconfig.yamlls.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
