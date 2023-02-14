@@ -7,6 +7,7 @@ require('mason-lspconfig').setup({
         'bashls',
         'cmake',
         'cssls',
+        'tailwindcss',
         'dockerls',
         'gopls',
         'html',
@@ -47,6 +48,10 @@ lspconfig.cmake.setup {
     on_attach = on_attach
 }
 lspconfig.cssls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+lspconfig.tailwindcss.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
