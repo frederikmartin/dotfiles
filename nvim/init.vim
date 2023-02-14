@@ -37,6 +37,7 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'github/copilot.vim'
 
 call plug#end()
 
@@ -45,6 +46,9 @@ lua require('lsp_config')
 
 " Treesitter config
 lua require('treesitter')
+
+" Copilot config
+lua require('copilot')
 
 " Color scheme
 set termguicolors
