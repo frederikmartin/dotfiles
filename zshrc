@@ -76,6 +76,7 @@ plugins=(
   docker
   macos
   zsh-autosuggestions
+  asdf
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -193,3 +194,13 @@ export PATH="$GOPATH/bin:$PATH"
 
 # Rust
 source "$HOME/.cargo/env"
+
+# Created by `pipx` on 2023-03-06 11:04:30
+export PATH="$PATH:/Users/fmartin/.local/bin"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/fmartin/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+# Direnv config
+eval "$(direnv hook zsh)"
