@@ -204,3 +204,18 @@ export PATH="/Users/fmartin/.rd/bin:$PATH"
 
 # Direnv config
 eval "$(direnv hook zsh)"
+
+# Jira helper
+jira () {
+    if [[ -z "${JIRA_SUBDOMAIN}" || -z "${JIRA_TEAM_NAME_SHORT}" ]]; then
+        echo -n "Error: Please provide env vars JIRA_SUBDOMAIN and JIRA_TEAM_NAME_SHORT\n"
+        return 1
+    fi
+
+    _jira_url="https://${JIRA_SUBDOMAIN}.atlassian.net"
+    if [[ -z "${1}" ]]; then
+        open "${_jira_url}"
+    else
+        open "${_jira_url}/browse/${JIRA_TEAM_NAME_SHORT}-${1}"
+    fi
+}
