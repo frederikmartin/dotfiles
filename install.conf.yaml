@@ -12,6 +12,7 @@
     ~/.vimrc: vimrc
     ~/.zshrc: zshrc
     ~/.asdfrc: asdfrc
+    ~/.config/direnv/direnv.toml: direnv.toml
     ~/.config/nvim/init.vim: nvim/init.vim
     ~/.config/nvim/lua/lsp_config.lua: nvim/lua/lsp_config.lua
     ~/.config/nvim/lua/treesitter.lua: nvim/lua/treesitter.lua
