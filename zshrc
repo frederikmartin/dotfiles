@@ -119,7 +119,9 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Custom functions
 
-alias dev="cd ~/Documents/development"
+alias dots="cd ~/Documents/dotfiles"
+alias pros="cd ~/Documents/projects"
+alias _shrug="echo -n '¯\_(ツ)_/¯' | pbcopy"
 
 # Create gitlab merge request for current branch
 gmr() {
@@ -134,9 +136,6 @@ gbc() {
     git pull
     git branch -D $feature_branch
 }
-
-# Shrug shortcut
-alias _shrug="echo -n '¯\_(ツ)_/¯' | pbcopy"
 
 # Add sbin to path
 export PATH="/usr/local/sbin:$PATH"
