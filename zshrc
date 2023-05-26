@@ -119,8 +119,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Custom functions
 
-alias dots="cd ~/Documents/dotfiles"
-alias pros="cd ~/Documents/projects"
+alias dev="cd ~/dev"
 alias _shrug="echo -n '¯\_(ツ)_/¯' | pbcopy"
 
 # Create gitlab merge request for current branch
