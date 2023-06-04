@@ -186,9 +186,7 @@ ide() {
 export GPG_TTY=$(tty)
 
 # Golang
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export PATH="$GOPATH/bin:$PATH"
+. ~/.asdf/plugins/golang/set-env.zsh
 
 # Rust
 source "$HOME/.cargo/env"
