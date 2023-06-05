@@ -76,6 +76,7 @@ plugins=(
   docker
   macos
   zsh-autosuggestions
+  fzf
   asdf
 )
 
