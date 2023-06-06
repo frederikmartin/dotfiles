@@ -74,10 +74,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(
   git
   docker
+  docker-compose
   macos
   zsh-autosuggestions
   fzf
   asdf
+  aws
 )
 
 source $ZSH/oh-my-zsh.sh
