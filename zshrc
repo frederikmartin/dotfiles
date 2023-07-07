@@ -218,3 +218,7 @@ jira () {
         open "${_jira_url}/browse/${JIRA_TEAM_NAME_SHORT}-${1}"
     fi
 }
+
+# Gradle aliases
+alias gws="./gradlew --stop"
+alias gwcb="./gradlew clean build"
