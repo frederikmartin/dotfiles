@@ -222,3 +222,4 @@ jira () {
 # Gradle aliases
 alias gws="./gradlew --stop"
 alias gwcb="./gradlew clean build"
+alias gwb="./gradlew bootRun"
