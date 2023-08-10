@@ -138,6 +138,7 @@ gbc() {
     git pull
     git branch -D $feature_branch
 }
+alias ghweb="gh repo view --web"
 
 # Add sbin to path
 export PATH="/usr/local/sbin:$PATH"
@@ -220,6 +221,7 @@ jira () {
 }
 
 # Gradle aliases
+alias gw="./gradlew"
 alias gws="./gradlew --stop"
 alias gwcb="./gradlew clean build"
 alias gwb="./gradlew bootRun"
