@@ -126,12 +126,12 @@ alias dev="cd ~/dev"
 alias _shrug="echo -n '¯\_(ツ)_/¯' | pbcopy"
 
 # Create gitlab merge request for current branch
-gmr() {
+function gmr() {
     branch=$(git branch --show-current)
     host=$(git remote get-url origin | sed "s/[^@]*@//; s/.[^.]*$//; s/:/\//")
     open "https://$host/-/merge_requests/new?merge_request[source_branch]=$branch"
 }
-gbc() {
+function gbc() {
     feature_branch=$(git branch --show-current)
     default_branch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
     git checkout $default_branch
@@ -161,7 +161,7 @@ alias vim="nvim"
 export FZF_DEFAULT_COMMAND='rg --files'
 
 # tmux ide pane setup
-ide() {
+function ide() {
     if [[ "$#" -eq 1 && "$1" == "v" ]]; then
         tmux split-window -h -p 75 "nvim ."
         tmux select-pane -t 0
@@ -206,7 +206,7 @@ export PATH="/Users/fmartin/.rd/bin:$PATH"
 eval "$(direnv hook zsh)"
 
 # Jira helper
-jira() {
+function jira() {
     if [[ -z "${JIRA_SUBDOMAIN}" || -z "${JIRA_TEAM_NAME_SHORT}" ]]; then
         echo -n "Error: Please provide env vars JIRA_SUBDOMAIN and JIRA_TEAM_NAME_SHORT\n"
         return 1
@@ -227,11 +227,12 @@ alias gwcb="./gradlew clean build"
 alias gwb="./gradlew bootRun"
 
 # Load project specific zsh config
-load-project-config() {
+function load_project_config() {
     local project_config=".project_zshrc"
     if [[ -f "$project_config" ]]; then
         source "$project_config"
     fi
 }
-chpwd_functions+=(load-project-config)
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd load_project_config
 
