@@ -206,7 +206,7 @@ export PATH="/Users/fmartin/.rd/bin:$PATH"
 eval "$(direnv hook zsh)"
 
 # Jira helper
-jira () {
+jira() {
     if [[ -z "${JIRA_SUBDOMAIN}" || -z "${JIRA_TEAM_NAME_SHORT}" ]]; then
         echo -n "Error: Please provide env vars JIRA_SUBDOMAIN and JIRA_TEAM_NAME_SHORT\n"
         return 1
@@ -225,3 +225,13 @@ alias gw="./gradlew"
 alias gws="./gradlew --stop"
 alias gwcb="./gradlew clean build"
 alias gwb="./gradlew bootRun"
+
+# Load project specific zsh config
+load-project-config() {
+    local project_config=".project_zshrc"
+    if [[ -f "$project_config" ]]; then
+        source "$project_config"
+    fi
+}
+chpwd_functions+=(load-project-config)
+
