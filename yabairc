@@ -12,9 +12,6 @@ yabai -m config window_gap 12
 
 # Mouse settings
 yabai -m config mouse_follows_focus on
-yabai -m config mouse_modifier alt
-yabai -m config mouse_action_1 move
-yabai -m config mouse_action_2 resize
 yabai -m config mouse_drop_action swap
 
 # Disable specific apps
