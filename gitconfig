@@ -1,5 +1,5 @@
 [init]
-    defaultBranch = main
+	defaultBranch = main
 [user]
 	useConfigOnly = true
 	signingKey = 23508AA96C85020BEB03B007123545A600D0E612
