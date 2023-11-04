@@ -48,3 +48,13 @@ shift + alt - 1: yabai -m window --space 1
 shift + alt - 2: yabai -m window --space 2
 shift + alt - 3: yabai -m window --space 3
 shift + alt - 4: yabai -m window --space 4
+
+# Resizing windows
+shift + lctrl - j: yabai -m window --resize top:0:-100
+shift + lctrl - k: yabai -m window --resize bottom:0:100
+shift + lctrl - h: yabai -m window --resize left:-100:0
+shift + lctrl - l: yabai -m window --resize right:100:0
+shift + lctrl + alt - j: yabai -m window --resize top:0:100
+shift + lctrl + alt - k: yabai -m window --resize bottom:0:-100
+shift + lctrl + alt - h: yabai -m window --resize left:100:0
+shift + lctrl + alt - l: yabai -m window --resize right:-100:0
