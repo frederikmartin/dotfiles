@@ -236,5 +236,6 @@ function load_project_config() {
 autoload -Uz add-zsh-hook
 add-zsh-hook chpwd load_project_config
 
-# Lazygit
+# Lazy stuff
 alias lg="lazygit"
+alias ld="lazydocker"
