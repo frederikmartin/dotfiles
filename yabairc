@@ -11,7 +11,6 @@ yabai -m config right_padding 12
 yabai -m config window_gap 12
 
 # Mouse settings
-yabai -m config mouse_follows_focus on
 yabai -m config mouse_drop_action swap
 
 # Disable specific apps
