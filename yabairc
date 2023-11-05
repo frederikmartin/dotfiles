@@ -16,3 +16,6 @@ yabai -m config mouse_drop_action swap
 # Disable specific apps
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
+
+# Enable specific apps
+yabai -m rule --add app="^XCode$" manage=on
