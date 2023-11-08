@@ -38,7 +38,7 @@ ctrl + alt - k: yabai -m window --warp north
 ctrl + alt - h: yabai -m window --warp west
 ctrl + alt - l: yabai -m window --warp east
 # Move window between displays
-shift + alt - s: yabai -m window --display west; yabai -m display --focus west
+shift + alt - f: yabai -m window --display west; yabai -m display --focus west
 shift + alt - g: yabai -m window --display east; yabai -m display --focus east
 # Move window between spaces
 shift + alt - p: yabai -m window --space prev
