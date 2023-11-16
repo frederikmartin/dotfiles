@@ -16,6 +16,9 @@ yabai -m config mouse_drop_action swap
 # Disable specific apps
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Microsoft\ Teams\ .*$" manage=off
+yabai -m rule --add app="^Yubico\ Authenticator$" manage=off
+yabai -m rule --add app="^.*KeePassXC$" manage=off
 
 # Enable specific apps
 yabai -m rule --add app="^XCode$" manage=on
