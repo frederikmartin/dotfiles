@@ -239,3 +239,5 @@ add-zsh-hook chpwd load_project_config
 # Lazy stuff
 alias lg="lazygit"
 alias ld="lazydocker"
+
+eval "$(zoxide init zsh)"
