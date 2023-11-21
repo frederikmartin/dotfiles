@@ -20,6 +20,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local ibl_highlight = { 'CursorColumn', 'Whitespace' }
+
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
 --
@@ -99,9 +101,17 @@ require('lazy').setup({
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
+    main = 'ibl',
     opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
+      indent = {
+        highlight = ibl_highlight,
+        char = '┊',
+      },
+      whitespace = {
+        highlight = ibl_highlight,
+        remove_blankline_trail = true,
+      },
+      scope = { enabled = false },
     },
   },
 
