@@ -249,6 +249,3 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-# sst
-export PATH=/Users/fmartin/.sst/bin:$PATH
