@@ -17,6 +17,7 @@
     ~/.tmux.conf: tmux.conf
     ~/.p10k.zsh: p10k.zsh
     ~/.tool-versions: tool-versions
+    ~/.aerospace.toml: aerospace.toml
 
 - shell:
   - ['git submodule update --init --recursive', 'Installing submodules']
