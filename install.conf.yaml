@@ -14,7 +14,6 @@
     ~/.asdfrc: asdfrc
     ~/.config/direnv/direnv.toml: direnv.toml
     ~/.config/nvim/init.lua: nvim/init.lua
-    ~/.config/nvim/lua/custom/plugins/filetree.lua: nvim/lua/custom/plugins/filetree.lua
     ~/.tmux.conf: tmux.conf
     ~/.p10k.zsh: p10k.zsh
     ~/.tool-versions: tool-versions
