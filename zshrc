@@ -155,6 +155,7 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # nvim
 alias vim="nvim"
+export VISUAL=nvim
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
