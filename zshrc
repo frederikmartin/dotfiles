@@ -227,3 +227,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Unbind forward-i-seach default key binding
+bindkey -r '^S'
