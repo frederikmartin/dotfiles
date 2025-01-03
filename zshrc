@@ -161,29 +161,6 @@ export VISUAL=nvim
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files'
 
-# tmux ide pane setup
-function ide() {
-    if [[ "$#" -eq 1 && "$1" == "v" ]]; then
-        tmux split-window -h -p 75 "nvim ."
-        tmux select-pane -t 0
-        clear
-        tmux select-pane -t 1
-    elif [[ "$#" -eq 1 && "$1" == "rn" ]]; then
-        tmux split-window -h -p 75 "nvim ."
-        tmux select-pane -t 0
-        clear
-        tmux split-window -v -p 25 "npm start"
-        tmux select-pane -t 2
-    else
-        tmux split-window -v -p 20
-        if [[ "$#" -eq 1 && "$1" == "l" ]]; then
-            tmux split-window -h -p 50
-        fi
-        tmux select-pane -t 0
-        vim .
-    fi
-}
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
