@@ -233,7 +233,3 @@ Z = 1
 [[on-window-detected]]
 if.app-id = 'com.apple.systempreferences'
 run = ['layout floating', 'move-node-to-workspace R']
-
-[[on-window-detected]]
-if.app-id = 'org.keepassxc.keepassxc'
-run = ['layout floating', 'move-node-to-workspace R']
