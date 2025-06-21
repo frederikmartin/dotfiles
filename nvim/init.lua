@@ -167,6 +167,12 @@ require('lazy').setup({
             max_tokens = 16192,
           },
         },
+        openai = {
+          endpoint = "https://api.openai.com/v1",
+          model = "gpt-4o-mini",
+          timeout = 30000,
+          extra = nil,
+        },
       },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
