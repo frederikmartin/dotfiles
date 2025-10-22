@@ -230,5 +230,3 @@ esac
 
 # Unbind forward-i-seach default key binding
 bindkey -r '^S'
-
-alias claude="npx claude"
