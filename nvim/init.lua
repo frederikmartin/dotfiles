@@ -424,11 +424,11 @@ mason_lspconfig.setup {
 }
 
 for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
-  require('lspconfig')[server_name].setup {
+  vim.lsp.config(server_name, {
     capabilities = capabilities,
     on_attach = on_attach,
     settings = servers[server_name],
-  }
+  })
 end
 
 -- nvim-cmp setup
