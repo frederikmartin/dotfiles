@@ -15,10 +15,10 @@
     ~/.config/direnv/direnv.toml: direnv.toml
     ~/.config/nvim/init.lua: nvim/init.lua
     ~/.tmux.conf: tmux.conf
-    ~/.p10k.zsh: p10k.zsh
     ~/.tool-versions: tool-versions
     ~/.aerospace.toml: aerospace.toml
     ~/.ideavimrc: ideavimrc
+    ~/.config/ghostty/config: ghostty.conf
 
 - shell:
   - ['git submodule update --init --recursive', 'Installing submodules']
