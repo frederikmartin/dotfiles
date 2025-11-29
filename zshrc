@@ -14,9 +14,9 @@ precmd() { vcs_info }
 
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr '%F{#a6e3a1}+%f'
+zstyle ':vcs_info:git:*' stagedstr '%F{#94e2d5}+%f'
 zstyle ':vcs_info:git:*' unstagedstr '%F{#f9e2af}*%f'
-zstyle ':vcs_info:git:*' formats ' %s(%F{#94e2d5}%b%f%u%c%m)'
+zstyle ':vcs_info:git:*' formats ' %s(%F{#89b4fa}%b%f%u%c%m)'
 zstyle ':vcs_info:git*+set-message:*' hooks git-remote-status
 
 +vi-git-remote-status() {
@@ -29,7 +29,7 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-remote-status
 
   hook_com[misc]=''
 
-  (( ${ahead:-0} > 0 )) && hook_com[misc]+="%F{#a6e3a1}⇡${ahead}%f"
+  (( ${ahead:-0} > 0 )) && hook_com[misc]+="%F{#94e2d5}⇡${ahead}%f"
   (( ${behind:-0} > 0 )) && hook_com[misc]+="%F{#f38ba8}⇣${behind}%f"
 }
 
