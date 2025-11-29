@@ -6,9 +6,32 @@ DEFAULT_USER=`whoami`
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Prompt customization
+setopt prompt_subst
+
 autoload -Uz vcs_info
 precmd() { vcs_info }
-zstyle ':vcs_info:*' formats ' %s(%F{#94e2d5}%b%f)'
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr '%F{#a6e3a1}+%f'
+zstyle ':vcs_info:git:*' unstagedstr '%F{#f9e2af}*%f'
+zstyle ':vcs_info:git:*' formats ' %s(%F{#94e2d5}%b %f%u%c%m)'
+zstyle ':vcs_info:git*+set-message:*' hooks git-remote-status
+
++vi-git-remote-status() {
+  local ahead behind
+
+  git rev-parse --abbrev-ref @{upstream} >/dev/null 2>&1 || return 0
+
+  ahead=$(git rev-list --count @{upstream}..HEAD 2>/dev/null)
+  behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
+
+  hook_com[misc]=''
+
+  (( ${ahead:-0} > 0 )) && hook_com[misc]+="%F{#a6e3a1}⇡${ahead}%f"
+  (( ${behind:-0} > 0 )) && hook_com[misc]+="%F{#f38ba8}⇣${behind}%f"
+}
 
 PS1='%F{#b4befe}%2d%f$vcs_info_msg_0_ $ '
 
