@@ -133,12 +133,13 @@ require('lazy').setup({
 
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
+    -- The `main` branch does not support lazy-loading.
+    lazy = false,
+    build = ':TSUpdate',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
     },
-    config = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
-    end,
   },
 
   -- File browser
@@ -275,70 +276,127 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- [[ Configure Treesitter ]]
--- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
-  -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'prisma' },
+-- See `:help nvim-treesitter` (main branch — requires Neovim 0.12+)
+--
+-- The `main` branch is a full rewrite: it only installs parsers/queries.
+-- Highlighting, indentation, and folding are now native Neovim features,
+-- enabled per-buffer via a FileType autocommand below.
+local ts_ensure_installed = {
+  'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx',
+  'typescript', 'vimdoc', 'vim', 'prisma',
+}
 
-  -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-  auto_install = false,
+require('nvim-treesitter').install(ts_ensure_installed)
 
-  highlight = { enable = true },
-  indent = { enable = true, disable = { 'python' } },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<c-space>',
-      node_incremental = '<c-space>',
-      scope_incremental = '<c-s>',
-      node_decremental = '<M-space>',
-    },
+-- Enable native treesitter highlighting + indentation for installed languages.
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('ts-setup', { clear = true }),
+  callback = function(args)
+    -- Indentation is experimental on `main`; skip python (as before).
+    if vim.bo[args.buf].filetype ~= 'python' then
+      vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+    -- `vim.treesitter.start` errors if no parser is available; guard it.
+    pcall(vim.treesitter.start, args.buf)
+  end,
+})
+
+-- [[ Treesitter textobjects ]] (main branch — explicit keymaps)
+require('nvim-treesitter-textobjects').setup {
+  select = {
+    lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
   },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
-      },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
-      },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ['<leader>a'] = '@parameter.inner',
-      },
-      swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
-      },
-    },
+  move = {
+    set_jumps = true, -- whether to set jumps in the jumplist
   },
 }
+
+local ts_select = require 'nvim-treesitter-textobjects.select'
+local ts_swap = require 'nvim-treesitter-textobjects.swap'
+local ts_move = require 'nvim-treesitter-textobjects.move'
+
+-- select
+for lhs, capture in pairs {
+  ['aa'] = '@parameter.outer',
+  ['ia'] = '@parameter.inner',
+  ['af'] = '@function.outer',
+  ['if'] = '@function.inner',
+  ['ac'] = '@class.outer',
+  ['ic'] = '@class.inner',
+} do
+  vim.keymap.set({ 'x', 'o' }, lhs, function()
+    ts_select.select_textobject(capture, 'textobjects')
+  end)
+end
+
+-- swap
+vim.keymap.set('n', '<leader>a', function()
+  ts_swap.swap_next '@parameter.inner'
+end, { desc = 'Swap with next parameter' })
+vim.keymap.set('n', '<leader>A', function()
+  ts_swap.swap_previous '@parameter.inner'
+end, { desc = 'Swap with previous parameter' })
+
+-- move
+for lhs, spec in pairs {
+  [']m'] = { ts_move.goto_next_start, '@function.outer' },
+  [']]'] = { ts_move.goto_next_start, '@class.outer' },
+  [']M'] = { ts_move.goto_next_end, '@function.outer' },
+  ['][' ] = { ts_move.goto_next_end, '@class.outer' },
+  ['[m'] = { ts_move.goto_previous_start, '@function.outer' },
+  ['[[' ] = { ts_move.goto_previous_start, '@class.outer' },
+  ['[M'] = { ts_move.goto_previous_end, '@function.outer' },
+  ['[]'] = { ts_move.goto_previous_end, '@class.outer' },
+} do
+  local fn, capture = spec[1], spec[2]
+  vim.keymap.set({ 'n', 'x', 'o' }, lhs, function()
+    fn(capture, 'textobjects')
+  end)
+end
+
+-- [[ Incremental selection ]]
+-- The `main` branch dropped this module, so implement it natively.
+do
+  local nodes = {}
+  local function init()
+    nodes = {}
+    local node = vim.treesitter.get_node()
+    if node then
+      nodes = { node }
+      local r1, c1, r2, c2 = node:range()
+      vim.api.nvim_win_set_cursor(0, { r1 + 1, c1 })
+      vim.cmd 'normal! v'
+      vim.api.nvim_win_set_cursor(0, { r2 + 1, math.max(c2 - 1, 0) })
+    end
+  end
+  local function select_node(node)
+    local r1, c1, r2, c2 = node:range()
+    vim.api.nvim_win_set_cursor(0, { r1 + 1, c1 })
+    vim.cmd 'normal! v'
+    vim.api.nvim_win_set_cursor(0, { r2 + 1, math.max(c2 - 1, 0) })
+  end
+  local function increment()
+    if #nodes == 0 then
+      init()
+      return
+    end
+    local cur = nodes[#nodes]
+    local parent = cur:parent()
+    if parent then
+      table.insert(nodes, parent)
+      select_node(parent)
+    end
+  end
+  local function decrement()
+    if #nodes > 1 then
+      table.remove(nodes)
+      select_node(nodes[#nodes])
+    end
+  end
+  vim.keymap.set('n', '<c-space>', init, { desc = 'Init treesitter selection' })
+  vim.keymap.set('x', '<c-space>', increment, { desc = 'Increment treesitter selection' })
+  vim.keymap.set('x', '<M-space>', decrement, { desc = 'Decrement treesitter selection' })
+end
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
