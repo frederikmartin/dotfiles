@@ -496,6 +496,64 @@ for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
   })
 end
 
+-- TypeScript 7 is a Go program. It has no tsserver.js file and no JavaScript
+-- API. ts_ls cannot use it. ts_ls falls back to its own bundled TypeScript and
+-- shows a warning. The tsgo server speaks LSP directly. Use tsgo instead.
+
+--- Find the workspace directory that has the native TypeScript compiler.
+--- @param bufnr integer The buffer to start the search from.
+--- @return string|nil dir The directory that contains node_modules.
+local function native_typescript_root(bufnr)
+  return vim.fs.root(bufnr, function(name, path)
+    if name ~= 'node_modules' then
+      return false
+    end
+    local lib = vim.fs.joinpath(path, name, 'typescript', 'lib')
+    return vim.uv.fs_stat(vim.fs.joinpath(lib, 'getExePath.js')) ~= nil
+      and vim.uv.fs_stat(vim.fs.joinpath(lib, 'tsserver.js')) == nil
+  end)
+end
+
+-- Keep ts_ls away from a workspace that has the native TypeScript compiler.
+local ts_ls_root_dir = vim.lsp.config.ts_ls.root_dir
+vim.lsp.config('ts_ls', {
+  root_dir = function(bufnr, on_dir)
+    if native_typescript_root(bufnr) then
+      return
+    end
+    ts_ls_root_dir(bufnr, on_dir)
+  end,
+})
+
+-- Start tsgo only in a workspace that has the native TypeScript compiler.
+vim.lsp.config('tsgo', {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  root_dir = function(bufnr, on_dir)
+    local root = native_typescript_root(bufnr)
+    if root then
+      on_dir(root)
+    end
+  end,
+  cmd = function(dispatchers, config)
+    -- The typescript package of version 7 installs the binary as `tsc`.
+    -- The @typescript/native-preview package installs it as `tsgo`.
+    local exe = 'tsgo'
+    local root = (config or {}).root_dir
+    if root then
+      for _, name in ipairs { 'tsgo', 'tsc' } do
+        local local_exe = vim.fs.joinpath(root, 'node_modules/.bin', name)
+        if vim.fn.executable(local_exe) == 1 then
+          exe = local_exe
+          break
+        end
+      end
+    end
+    return vim.lsp.rpc.start({ exe, '--lsp', '--stdio' }, dispatchers)
+  end,
+})
+vim.lsp.enable 'tsgo'
+
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
