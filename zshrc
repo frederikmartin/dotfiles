@@ -243,3 +243,6 @@ esac
 
 # Unbind forward-i-seach default key binding
 bindkey -r '^S'
+
+# opencode
+export PATH=/Users/fmartin/.opencode/bin:$PATH
